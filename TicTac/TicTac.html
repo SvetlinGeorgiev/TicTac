@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Tic Tac Toe</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <section id="game--input">
+            <input id="field-size" type="number" placeholder="How big is ya field?">
+            <input id="win-amount" type="number" placeholder="How much do ya need for a win?">
+            <button type="button" onclick="new Morski().handleInput()">Too small, but whatever...</button>
+        </section>
+        <section id="game--field">
+            <h1 class="game--title">Tic Tac Toe</h1>
+            <div id="game--container">
+            </div>
+            <div class="header">
+                <h2 class="game--status"></h2>
+            </div>
+            <button class="game--start" onclick="setTimeout((new Morski()).run(), 1000); style.display = 'none'; document.querySelector('.game--restart').style.display = 'inline-block';">Start Game</button>
+            <button class="game--restart">Restart Game</button>
+        </section>
+        <script src="script.js"></script>
+    </body>
+</html>
