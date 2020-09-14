@@ -1,0 +1,82 @@
+body {
+    font-family: "Arial", sans-serif;
+    background-color: blueviolet;
+}
+#game--field {
+    text-align: center;
+    display: none;
+}
+#game--container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 306px;
+    margin: 50px auto;
+}
+.cell {
+    font-family: "Permanent Marker", cursive;
+    background-color: yellow;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 0 0 1px #333333;
+    border: 1px solid #333333;
+    cursor: pointer;
+    line-height: 100px;
+    font-size: 60px;
+}
+.game--restart {
+    background-color: white;
+    padding: 18px;
+    font-size:20px;
+    font-weight: bold;
+    color: black;
+    border: 2px solid #555555;
+    border-radius: 50px;
+    display: none;
+  } 
+.game--restart:hover {
+    background-color: #555555;
+    color: white;
+    border-radius: 50px;
+}
+.game--start {
+    background-color: white;
+    padding: 18px;
+    font-size:20px;
+    font-weight: bold;
+    color: black;
+    border: 2px solid #555555;
+    border-radius: 50px;
+  } 
+.game--start:hover {
+    background-color: #555555;
+    color: white;
+    border-radius: 50px;
+}
+#game--input {
+    text-align: center;
+    border-radius: 50px;
+}
+#field-size{
+    font-size:30px;
+}
+#win-amount{
+    margin-top: 25%;
+    font-size:30px;
+}
+button{
+    background-color: white;
+    padding: 18px;
+    font-size:20px;
+    font-weight: bold;
+    color: black;
+    border: 2px solid #555555;
+    border-radius: 50px;
+}
+button:hover {
+    background-color: #555555;
+    color: white;
+    border-radius: 50px;
+}
+.game--title {
+    text-align: center;
+}
