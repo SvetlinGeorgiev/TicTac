@@ -11,6 +11,8 @@ class Morski{
         this.stat = document.querySelectorAll('.game--status');
         this.init();
         this.count = 0;
+        this.wWays = [];
+        this.yWays = [];
     }
     //let gameActive = true;
     //let currentPlayer = "X";
@@ -55,31 +57,101 @@ class Morski{
 
     handleResultValidation() {
         let roundWon = false;
-        for (let i = 0; i <= 7; i++) {
-            const winCondition = winningConditions[i];
-            let a = this.gameState[winCondition[0]];
-            let b = this.gameState[winCondition[1]];
-            let c = this.gameState[winCondition[2]];
-            if (a === '' || b === '' || c === '') {
-                continue;
+        
+        for (let i = 0; i <= this.fieldSize; i++) {
+            let flag = 0;    
+            for(let j = 0; j <= this.fieldSize; j++)
+            {
+                
+                if(this.gameState[i*this.fieldSize + j] === "X"){
+                        
+                    flag = flag + 1;
+                        
+                    if(flag == this.win){
+                        this.stat.forEach(header => header.innerHTML = "X won!");
+                        roundWon = true;
+                        flag = 0;
+                        break;
+                    }
+                }
+                else{
+                    flag = 0;
+                }
             }
-            if (a === b && b === c) {
+            for(let j = 0; j <= this.fieldSize; j++)
+            {
+                
+                if(this.gameState[i*this.fieldSize + j] === "O"){
+                        
+                    flag = flag + 1;
+                        
+                    if(flag == this.win){
+                        this.stat.forEach(header => header.innerHTML = "O won!");
+                        roundWon = true;
+                        flag = 0;
+                        break;
+                    }
+                }
+                else{
+                    flag = 0;
+                }
+            }
+                // for (let i = 0; i < this.fieldSize; i++){
+                //     let flag = 0;
+                //     for (var j = 0 ; j < this.win ; j++){
+                //       if(parseInt(input[j].slice(1,2)) === i){
+                //         flag +=1;
+                //       }
+                //       if (flag === this.fieldSize){
+                //         flag = 0;
+                //         roundWon = true;
+                //         break;
+                //       }
+                //     }
+                //   }
+            //     this.flag = flag + 1;
+            //     if(clickedCell.getAttribute('id') + 1 == 'X'){
+            //         this.flag = flag + 1;
+            //         if(this.flag == this.fieldSize){
+            //             this.stat;
+            //             //debugger
+            //             const allCells = document.querySelectorAll('.cell') //.forEach(cell => cell.style.background = 'green');
+            //             if(this.currentPlayer === "X"){
+            //                 this.stat.forEach(header => header.innerHTML = "X won!");
+            //             }
+            //             else if(this.currentPlayer === "O"){
+            //                 this.stat.forEach(header => header.innerHTML = "O won!");
+            //             }
+            //             roundWon = true;
+            //             break
+            //         }
+            //     }
+            // }
+            // else if(this.currentPlayer == "O")
+            // {
+            //     this.flag = flag + 1;
+            //     if(clickedCell.getAttribute('id') + 1 == 'O'){
+            //         this.flag = flag + 1;
+            //         if(this.flag == this.fieldSize){
+            //             this.stat;
+            //             //debugger
+            //             const allCells = document.querySelectorAll('.cell') //.forEach(cell => cell.style.background = 'green');
+            //             if(this.currentPlayer === "X"){
+            //                 this.stat.forEach(header => header.innerHTML = "X won!");
+            //             }
+            //             else if(this.currentPlayer === "O"){
+            //                 this.stat.forEach(header => header.innerHTML = "O won!");
+            //             }
+            //             roundWon = true;
+            //             break
+            //         }
+            //     }
+            // }
+
+            
                 //'bjhjhhj' + asd + 'asdasd' === "nhnj" != `nhjnj ${asd}`
-                this.stat;
-                //debugger
-                const allCells = document.querySelectorAll('.cell') //.forEach(cell => cell.style.background = 'green');
-                allCells[winCondition[0]].style.background = '#7FFF00';
-                allCells[winCondition[1]].style.background = '#7FFF00';
-                allCells[winCondition[2]].style.background = '#7FFF00';
-                if(this.currentPlayer === "X"){
-                    this.stat.forEach(header => header.innerHTML = "X won!");
-                }
-                else if(this.currentPlayer === "O"){
-                    this.stat.forEach(header => header.innerHTML = "O won!");
-                }
-                roundWon = true;
-                break
-            }
+                
+            
             
         }
         if (roundWon) {
@@ -128,6 +200,7 @@ class Morski{
         this.cellh.forEach(cell => cell.style.background = 'yellow');
         this.stat.forEach(header => header.innerHTML = "X turn");
         this.count = 0;
+        this.flag = 0;
     }
 
     init(){
@@ -144,16 +217,16 @@ class Morski{
     
 }
 
-const winningConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
+// const winningConditions = [
+//     [0, 1, 2],
+//     [3, 4, 5],
+//     [6, 7, 8],
+//     [0, 3, 6],
+//     [1, 4, 7],
+//     [2, 5, 8],
+//     [0, 4, 8],
+//     [2, 4, 6]
+// ];
 
 
 

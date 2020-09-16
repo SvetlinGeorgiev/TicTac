@@ -5,6 +5,7 @@ body {
 #game--field {
     text-align: center;
     display: none;
+    width: 100%;
 }
 #game--container {
     display: grid;
