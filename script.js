@@ -11,8 +11,7 @@ class Morski{
         this.stat = document.querySelectorAll('.game--status');
         this.init();
         this.count = 0;
-        this.wWays = [];
-        this.yWays = [];
+        //this.flag = 0;
     }
     //let gameActive = true;
     //let currentPlayer = "X";
@@ -46,6 +45,7 @@ class Morski{
             clickedCell.style.background = 'white';
         }
         clickedCell.innerHTML = this.currentPlayer;
+        //console.log(clickedCellIndex);
     }
 
     handlePlayerChange() {
@@ -55,14 +55,64 @@ class Morski{
       
     }
 
+    /*handleMatch(i, j){
+        if(this.gameState[i*this.fieldSize + j] === "X"){
+                        
+            this.flag = flag + 1;
+                
+            if(this.flag == this.win){
+                this.stat.forEach(header => header.innerHTML = "X won!");
+                flag = 0;
+            }
+        }
+        else if(this.gameState[i*this.fieldSize + j] === "O"){
+                        
+            this.flag = flag + 1;
+                
+            if(this.flag == this.win){
+                this.stat.forEach(header => header.innerHTML = "O won!");
+                flag = 0;
+            }
+        }
+        
+    }*/
+
     handleResultValidation() {
+        // const winningConditions = [
+        //     // [0, 1, 2],
+        //     // [3, 4, 5],
+        //     // [6, 7, 8],
+        //     // [0, 3, 6],
+        //     // [1, 4, 7],
+        //     // [2, 5, 8],
+        //     // [0, 4, 8],
+        //     // [2, 4, 6]
+        // ];
+
+        // for(let a = 0; a <= Math.pow(this.fieldSize, 2); a += this.fieldSize){
+        //     let mass = [];
+        //     for(let j = a; j < a + this.fieldSize; j++){
+        //         mass.push(j);
+        //     }
+        //     winningConditions.push(mass);
+        // }
+
+
         let roundWon = false;
         
         for (let i = 0; i <= this.fieldSize; i++) {
-            let flag = 0;    
+            let flag = 0;
+            let yflag = 0;
+            let xvflag = 0;
+            let yvflag = 0;  
+            let xxvflag = 0;
+            let yyvflag = 0;
+            let xxxvflag = 0;
+            let yyyvflag = 0;  
             for(let j = 0; j <= this.fieldSize; j++)
             {
-                
+                //pomoshtna funkciq za proverka dali e X ili O
+                // 1 maks 2 cikula do 30tina reda
                 if(this.gameState[i*this.fieldSize + j] === "X"){
                         
                     flag = flag + 1;
@@ -74,28 +124,219 @@ class Morski{
                         break;
                     }
                 }
-                else{
-                    flag = 0;
-                }
-            }
-            for(let j = 0; j <= this.fieldSize; j++)
-            {
                 
-                if(this.gameState[i*this.fieldSize + j] === "O"){
+                else if(this.gameState[i*this.fieldSize + j] === "O"){
                         
-                    flag = flag + 1;
+                    yflag = yflag + 1;
                         
-                    if(flag == this.win){
+                    if(yflag == this.win){
                         this.stat.forEach(header => header.innerHTML = "O won!");
                         roundWon = true;
-                        flag = 0;
+                        yflag = 0;
                         break;
                     }
                 }
                 else{
                     flag = 0;
+                    yflag = 0;
+                }
+                if(this.gameState[i + j * this.fieldSize] === "X"){
+                    xvflag = xvflag + 1;
+                    if(xvflag == this.win){
+                        this.stat.forEach(header => header.innerHTML = "X won!");
+                        roundWon = true;
+                        xvflag = 0;
+                        break;
+                    }
+                    
+                }
+                else if(this.gameState[i + j * this.fieldSize] === "O"){
+                    
+                    yvflag = yvflag + 1;
+                    
+                    if(yvflag == this.win){
+                        this.stat.forEach(header => header.innerHTML = "O won!");
+                        roundWon = true;
+                        yvflag = 0;
+                        break;
+                    }
+                }
+                else{
+                    xvflag = 0;
+                    yvflag = 0;
+                }
+                if(this.gameState[i + j * this.fieldSize + j] === "X"){
+                    xxvflag = xxvflag + 1;
+                    if(xxvflag == this.win){
+                        this.stat.forEach(header => header.innerHTML = "X won!");
+                        roundWon = true;
+                        xxvflag = 0;
+                        break;
+                    }
+                    
+                }
+                
+                else if(this.gameState[i + j * this.fieldSize + j] === "O"){
+                    
+                    yyvflag = yyvflag + 1;
+                    
+                    if(yyvflag == this.win){
+                        this.stat.forEach(header => header.innerHTML = "O won!");
+                        roundWon = true;
+                        yyvflag = 0;
+                        break;
+                    }
+                }
+                else{
+                    xxvflag = 0;
+                    yyvflag = 0;
+                }
+                 if(this.gameState[i + j * this.fieldSize - j] === "X"){
+                    xxxvflag = xxxvflag + 1;
+                    if(xxxvflag == this.win){
+                        this.stat.forEach(header => header.innerHTML = "X won!");
+                        roundWon = true;
+                        xxxvflag = 0;
+                        break;
+                    }
+                    // 2 funkcii, 1 koqto da smqta indeksa ot i i j(prevrushta koordinati v index i druga index v koordinati)!
+                }
+                
+                else if(this.gameState[i + j * this.fieldSize - j] === "O"){
+                    //console.log(i + j * this.fieldSize - j);
+                    console.log(i);
+                    console.log(j);
+                    yyyvflag = yyyvflag + 1;
+                    
+                    if(yyyvflag == this.win){
+                        this.stat.forEach(header => header.innerHTML = "O won!");
+                        roundWon = true;
+                        yyyvflag = 0;
+                        break;
+                    }
+                }
+                else{
+                    xxxvflag = 0;
+                    yyyvflag = 0;
+
                 }
             }
+            
+            // for(let j = 0; j < this.fieldSize; j++)
+            // {
+                
+            //     // else if(this.gameState[i + j * this.fieldSize] === "X"){
+            //     //     xvflag = xvflag + 1;
+            //     //     if(xvflag == this.win){
+            //     //         this.stat.forEach(header => header.innerHTML = "X won!");
+            //     //         roundWon = true;
+            //     //         xvflag = 0;
+            //     //         break;
+            //     //     }
+                    
+            //     // }
+            //     // else if(this.gameState[i + j * this.fieldSize] === "O"){
+                    
+            //     //     yvflag = yvflag + 1;
+                    
+            //     //     if(yvflag == this.win){
+            //     //         this.stat.forEach(header => header.innerHTML = "O won!");
+            //     //         roundWon = true;
+            //     //         yvflag = 0;
+            //     //         break;
+            //     //     }
+            //     // }
+            //     else{
+            //         yvflag = 0;
+            //         xvflag = 0;
+            //     }
+                
+            // }
+
+            // for(let j = 0; j < this.fieldSize; j++)
+            // {
+                
+            //     else if(this.gameState[i + j * this.fieldSize + j] === "X"){
+            //         xxvflag = xxvflag + 1;
+            //         if(xxvflag == this.win){
+            //             this.stat.forEach(header => header.innerHTML = "X won!");
+            //             roundWon = true;
+            //             xxvflag = 0;
+            //             break;
+            //         }
+                    
+            //     }
+                
+            //     else if(this.gameState[i + j * this.fieldSize + j] === "O"){
+                    
+            //         yyvflag = yyvflag + 1;
+                    
+            //         if(yyvflag == this.win){
+            //             this.stat.forEach(header => header.innerHTML = "O won!");
+            //             roundWon = true;
+            //             yyvflag = 0;
+            //             break;
+            //         }
+            //     }
+            //     else{
+            //         yyvflag = 0;
+            //         xxvflag = 0;
+            //     }
+                
+            // }
+           
+
+            // for(let j = 0; j < this.fieldSize; j++)
+            // {
+                
+            //     else if(this.gameState[i + j * this.fieldSize - j] === "X"){
+            //         xxxvflag = xxxvflag + 1;
+            //         if(xxxvflag == this.win){
+            //             this.stat.forEach(header => header.innerHTML = "X won!");
+            //             roundWon = true;
+            //             xxxvflag = 0;
+            //             break;
+            //         }
+            //         // 2 funkcii, 1 koqto da smqta indeksa ot i i j(prevrushta koordinati v index i druga index v koordinati)!
+            //     }
+                
+            //     else if(this.gameState[i + j * this.fieldSize - j] === "O"){
+            //         //console.log(i + j * this.fieldSize - j);
+            //         console.log(i);
+            //         console.log(j);
+            //         yyyvflag = yyyvflag + 1;
+                    
+            //         if(yyyvflag == this.win){
+            //             this.stat.forEach(header => header.innerHTML = "O won!");
+            //             roundWon = true;
+            //             yyyvflag = 0;
+            //             break;
+            //         }
+            //     }
+            //     else{
+            //         yyyvflag = 0;
+            //         xxxvflag = 0;
+            //     }
+            // }
+            // for(let j = 0; j < this.fieldSize; j++)
+            // {
+                
+            //     if(this.gameState[i + j * this.fieldSize - j] === "O"){
+                    
+            //         yyyvflag = yyyvflag + 1;
+                    
+            //         if(yyyvflag == this.win){
+            //             this.stat.forEach(header => header.innerHTML = "O won!");
+            //             roundWon = true;
+            //             yyyvflag = 0;
+            //             break;
+            //         }
+            //     }
+            //     else{
+            //         yyyvflag = 0;
+            //     }
+            // }
+
                 // for (let i = 0; i < this.fieldSize; i++){
                 //     let flag = 0;
                 //     for (var j = 0 ; j < this.win ; j++){
